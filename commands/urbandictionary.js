@@ -15,7 +15,7 @@ module.exports = {
 				if(data.list.length > 0) {
 					let i = Math.floor(Math.random() * data.list.length);
 					let str = data.list[i].definition;
-					let definition = str.replace(/[[]]/g,'');
+					let definition = str.replace(/\[/g,"").replace(/\]/g,"");;
 					message.channel.send("```"+ definition + "```");
 				}
 				else {

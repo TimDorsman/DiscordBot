@@ -6,7 +6,6 @@ module.exports = {
 	async run(message, args) {
 		let term;
 		if(args.length >= 2) {
-			term = args[0].concat("%20" + args[1]);
 			for(i=0; i < args.length; i++) {
 				term = args[0].concat("%20", args[i]);
 			}
@@ -25,7 +24,7 @@ module.exports = {
 		xhr.onreadystatechange = () => {
 			if(xhr.readyState == 4 && xhr.status == 200) {
 				let data = JSON.parse(xhr.responseText);
-				console.log(data);
+				console.log(data.list[0].wind);
 
 				message.channel.send({embed: {
 
@@ -46,7 +45,7 @@ module.exports = {
 						},
 						{
 							name: "Weather type",
-							value: `${data.list[0].weather[0].description}`,
+							value: `${data.list[0].weather[0].description}${data.list[0].wind.speed}`,
 						},
 						{
 							name: "Humidity",
@@ -59,9 +58,6 @@ module.exports = {
 						
 					}
 				}});
-			}
-			else {
-				console.log('something went wrong..');
 			}
 		}
 		xhr.open("GET", url, true);
