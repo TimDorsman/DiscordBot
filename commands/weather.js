@@ -42,7 +42,7 @@ module.exports = {
 						},
 						{
 							name: "Temperature",
-							value: `${data.list[0].main.temp} °C`,
+							value: Math.floor(data.list[0].main.temp) + '°C',
 						},
 						{
 							name: "Weather type",
