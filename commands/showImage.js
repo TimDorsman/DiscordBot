@@ -1,7 +1,7 @@
 module.exports = {
-        name: "me",
-        usage: "!me <query>",
-        description: "Shows an image of yourself",
+        name: "gif",
+        usage: "!gif <query>",
+        description: "Show a cool GIF",
 
        run: async (message, args) => {
             let url;
@@ -14,18 +14,13 @@ module.exports = {
             let xhr = new XMLHttpRequest();
 
             xhr.onreadystatechange = () => {
-                try {
                     if(xhr.readyState == 4 && xhr.status == 200) {
                         let response = JSON.parse(xhr.responseText);
                         if(response.data.length > 0)
-                        message.channel.send(``, {files: [`${response.data[0].images.original.url}`]})
+                            message.channel.send(``, {files: [`${response.data[0].images.original.url}`]})
                         else
-                        message.channel.send('There are no GIFS for this request');
+                            message.channel.send('There are no GIFS for this request');
                     }
-                }
-                catch(err) {
-                    console.log(err);
-                }
             };
             xhr.open("GET", url, true);
             xhr.send();
