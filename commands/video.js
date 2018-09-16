@@ -1,8 +1,8 @@
 const ytdl = require('ytdl-core');
 
 module.exports = {
-    name: "vid",
-    usage: "!vid <url>",
+    name: "song",
+    usage: "!song <url>",
     description: "Plays a youtube video",
 
     async run(message, args) {

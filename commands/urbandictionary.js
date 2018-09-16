@@ -13,14 +13,14 @@ module.exports = {
 			if(xhr.readyState == 4 && xhr.status == 200) {
 				let data = JSON.parse(xhr.responseText);
 				if(data.list.length > 0) {
-					let str = data.list[0].definition
-					let definition = str.replace(/[^a-zA-Z ]/g, '');
+					let i = Math.floor(Math.random() * data.list.length);
+					let str = data.list[i].definition;
+					let definition = str.replace(/[[]]/g,'');
 					message.channel.send("```"+ definition + "```");
 				}
 				else {
 					message.channel.send("Sorry we couldn't find a definition for this word");
 				}
-
 			}
 		}
 		xhr.open("GET", url, true);

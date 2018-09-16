@@ -12,6 +12,5 @@ module.exports = {
         roll = Math.floor((Math.random() * 10) + 1);
 
         message.reply(`You rolled a ${roll}`);
-        console.log(message.content);
     }
 }

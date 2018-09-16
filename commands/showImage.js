@@ -3,7 +3,7 @@ module.exports = {
         usage: "!gif <query>",
         description: "Show a cool GIF",
 
-       run: async (message, args) => {
+       async run (message, args) {
             let url;
 
             if(args[0])
