@@ -4,6 +4,7 @@
   "description": "Discord Bot",
   "main": "bot.js",
   "scripts": {
+    "start": "node bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,4 +26,5 @@
     "xmlhttprequest": "^1.8.0",
     "ytdl-core": "^0.25.2"
   }
+  
 }
