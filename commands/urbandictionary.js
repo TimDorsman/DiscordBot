@@ -1,10 +1,21 @@
 module.exports = {
 	name: "urban",
-	usage: "!urban <term>",
+	usage: "!urban <term> <term2>",
 	description: "Get the definition of a word",
 
 	async run(message, args) {
-		const url = `http://api.urbandictionary.com/v0/define?term=${args[0]}`;
+
+
+		if(args.length >= 2) {
+			for(i=0; i < args.length; i++) {
+				term = args[0].concat("%20", args[i]);
+			}
+		}
+		else {
+			term = args[0];
+		}
+
+		const url = `http://api.urbandictionary.com/v0/define?term=${term}`;
 
 		const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 		let xhr = new XMLHttpRequest();
