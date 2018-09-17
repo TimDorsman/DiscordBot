@@ -21,24 +21,37 @@ module.exports = {
 			if(xhr.readyState == 4 && xhr.status == 200) {
 				let data = JSON.parse(xhr.responseText);
 				let colorEmbed;
+				let thumbImage;
 				
 				switch (data.list[0].weather[0].description) {
 					case 'clear temperature ':
 						colorEmbed = 3134439;
+						thumbImage = 'https://cdn1.iconfinder.com/data/icons/weather-elements/512/Weather_SunAbstract.png'
 						break;
 					case 'few clouds':
 						colorEmbed = 4370232;
+						thumbImage = 'https://mbtskoudsalg.com/images/black-clouds-png-7.png';
 						break;
 					case 'light rain':
 						colorEmbed = 15198501;
+						thumbImage = 'https://images.blogthings.com/whatsyouridealweatherquiz/light-rain.png';
 						break;
 					case 'moderate rain':
 						colorEmbed = 15643149;
+						thumbImage = 'http://pluspng.com/img-png/png-rain-cloud-cloud-clouds-cloudy-forecast-night-rain-weather-icon-256.png';
+						break;
+					case 'scattered clouds':
+						colorEmbed = 32311681;
+						thumbImage = 'http://pngimg.com/uploads/cloud/cloud_PNG13.png';
+					case 'clear sky':
+						colorEmbed = 42512345;
+						thumbImage = 'https://www.clearskymd.com/wp-content/uploads/2017/05/clear-sky-blue-background.png';
 						break;
 					default:
 						colorEmbed = 16711681;
+						thumbImage = 'http://pluspng.com/img-png/happy-sun-png-no-background-gallery-recent-updates-cartoon-sunhappy-586.png';
 						break;
-				}
+				};
 
 				message.channel.send({embed: {
 
@@ -47,7 +60,7 @@ module.exports = {
 					description: " ",
 					url: "https://github.com/TimDorsman/DiscordBot",
 					thumbnail: {
-						url: 'http://icons.iconarchive.com/icons/papirus-team/papirus-apps/256/weather-icon.png'
+						url: thumbImage,
 					},
 					fields: [{
 							name: "City",
