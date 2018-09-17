@@ -47,6 +47,12 @@ module.exports = {
 						colorEmbed = 4251234;
 						thumbImage = 'https://www.clearskymd.com/wp-content/uploads/2017/05/clear-sky-blue-background.png';
 						break;
+					case 'broken clouds':
+						colorEmbed = 8439299;
+						thumbImage = 'https://www.freeiconspng.com/uploads/clouds-png-18.png';
+					case 'overcast clouds':
+						colorEmbed = 6235521;
+						thumbImage = 'https://banner2.kisspng.com/20180403/wew/kisspng-weather-forecasting-cloud-cover-wind-snow-cloudy-5ac37740150025.823420371522759488086.jpg';
 					default:
 						colorEmbed = 16711681;
 						thumbImage = 'http://pluspng.com/img-png/happy-sun-png-no-background-gallery-recent-updates-cartoon-sunhappy-586.png';
