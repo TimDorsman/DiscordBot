@@ -1,6 +1,6 @@
 module.exports = {
 	name: "urban",
-	usage: "!urban <term> <term2>",
+	usage: "!urban <term> <term2> <term3> <term4>",
 	description: "Get the definition of a word",
 
 	async run(message, args) {
@@ -14,7 +14,7 @@ module.exports = {
 		else {
 			term = args[0];
 		}
-
+		console.log(term);
 		const url = `http://api.urbandictionary.com/v0/define?term=${term}`;
 
 		const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
