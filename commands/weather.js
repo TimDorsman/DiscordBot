@@ -11,24 +11,38 @@ module.exports = {
 			}
 		}
 		else {
-			console.log(args[0]);
 			term = args[0];
 		}
-		
-		console.log(term);
 		let url = `http://api.openweathermap.org/data/2.5/forecast?q=${term}&APPID=e710119f33ab831a30eaf3f6e9f4fb2f&units=metric`;
 
 		const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 		let xhr = new XMLHttpRequest();
-
 		xhr.onreadystatechange = () => {
 			if(xhr.readyState == 4 && xhr.status == 200) {
 				let data = JSON.parse(xhr.responseText);
-				console.log(data.list[0].wind);
+				let colorEmbed;
+				
+				switch (data.list[0].weather[0].description) {
+					case 'clear temperature ':
+						colorEmbed = 3134439;
+						break;
+					case 'few clouds':
+						colorEmbed = 4370232;
+						break;
+					case 'light rain':
+						colorEmbed = 15198501;
+						break;
+					case 'moderate rain':
+						colorEmbed = 15643149;
+						break;
+					default:
+						colorEmbed = 16711681;
+						break;
+				}
 
 				message.channel.send({embed: {
 
-					color: 3447003,
+					color: colorEmbed,
 					title: "Weather",
 					description: " ",
 					url: "https://github.com/TimDorsman/DiscordBot",
@@ -45,7 +59,7 @@ module.exports = {
 						},
 						{
 							name: "Weather type",
-							value: `${data.list[0].weather[0].description}${data.list[0].wind.speed}`,
+							value: `${data.list[0].weather[0].description}`,
 						},
 						{
 							name: "Humidity",

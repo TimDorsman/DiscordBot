@@ -10,42 +10,42 @@ commandFiles.push(fs.readdirSync('.').filter( file => file.endsWith('cmds.js')))
 let command;
 
 for (const file of commandFiles) {
-    if(file[0] === 'cmds.js') {
-        command = require(`./${file[0]}`);
-    }
-    else {
-        command = require(`./commands/${file}`);
-    }
+	if(file[0] === 'cmds.js') {
+		command = require(`./${file[0]}`);
+	}
+	else {
+		command = require(`./commands/${file}`);
+	}
 
-    client.commands.set(command.name, command);
+	client.commands.set(command.name, command);
 }
 
 const prefix = '!';
 
 let args; 
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}`);
+	console.log(`Logged in as ${client.user.tag}`);
 });
 
 client.on('message', async message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    args = message.content.slice(prefix.length).split(' ');
-    command = args.shift().toLowerCase();
+	args = message.content.slice(prefix.length).split(' ');
+	command = args.shift().toLowerCase();
   
-    if (command === 'cmds') {
-      client.commands.get(command).run(message, args);
-      return;
-    }
+	if (command === 'cmds') {
+	  client.commands.get(command).run(message, args);
+	  return;
+	}
   
-    if (!client.commands.has(command)) return;
+	if (!client.commands.has(command)) return;
   
-    try {
-      client.commands.get(command).run(message, args);
-    } catch (error) {
-      console.error(error);
-      message.reply('there was an error trying to execute that command!');
-    }
+	try {
+	  client.commands.get(command).run(message, args);
+	} catch (error) {
+	  console.error(error);
+	  message.reply('there was an error trying to execute that command!');
+	}
 });
 
 client.login(config.token);
