@@ -41,10 +41,10 @@ module.exports = {
 						thumbImage = 'http://pluspng.com/img-png/png-rain-cloud-cloud-clouds-cloudy-forecast-night-rain-weather-icon-256.png';
 						break;
 					case 'scattered clouds':
-						colorEmbed = 32311681;
+						colorEmbed = 3231168;
 						thumbImage = 'http://pngimg.com/uploads/cloud/cloud_PNG13.png';
 					case 'clear sky':
-						colorEmbed = 42512345;
+						colorEmbed = 4251234;
 						thumbImage = 'https://www.clearskymd.com/wp-content/uploads/2017/05/clear-sky-blue-background.png';
 						break;
 					default:
