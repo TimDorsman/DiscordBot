@@ -29,10 +29,10 @@ module.exports = {
                 } else {
                     explanation = data[2][0];
                 }
-                
+
                 message.channel.send({embed: {
                     color: 6235521,
-                    title: `${term.toUpperCase()}`,
+                    title: `${term.toUpperCase().replace('_',' ')}`,
                     url: `${data[3][0]}`,
                     thumbnail: {
                         url: '',
