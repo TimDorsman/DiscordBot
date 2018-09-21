@@ -14,7 +14,7 @@ module.exports = {
 		else {
 			term = args[0];
 		}
-		const url = `http://en.wikipedia.org/w/api.php?action=opensearch&search=${term}&prop=revisions&rvprop=content&format=json&limit=5`;
+        const url = `http://en.wikipedia.org/w/api.php?action=opensearch&search=${term}&prop=revisions&rvprop=content&format=json&limit=5`;
         let image;
         let pageId;
 
@@ -36,14 +36,14 @@ module.exports = {
             })
             .then(myJson => {
                 let data = myJson;
-                if(data[2][0].length > 0 && data[2][0].length > 0 && data[2][1].length > 0) {
+                console.log("Url " + data[3][0], "");
+                if(data[3][0].length > 0 && data[2][0].length > 0 || data[2][1].length > 0) {
                     let explanation;
                     if(data[2][0].includes("may refer to")) {
                         explanation  = data[2][1];
                     } else {
                         explanation = data[2][0];
                     }
-    
                     message.channel.send({embed: {
                         color: 6235521,
                         title: `${term.toUpperCase().replace('_',' ')}`,
