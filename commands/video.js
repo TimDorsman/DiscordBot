@@ -21,7 +21,6 @@ module.exports = {
             let dispatcher = connection.playStream(video);
 
             dispatcher.on('end', () => {
-                console.log('video has ended');
                 voiceChannel.leave();
             })
             

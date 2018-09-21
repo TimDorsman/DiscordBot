@@ -14,7 +14,6 @@ module.exports = {
 		else {
 			term = args[0];
 		}
-		console.log(term);
 		const url = `http://en.wikipedia.org/w/api.php?action=opensearch&search=${term}&prop=revisions&rvprop=content&format=json&limit=5`;
 
         fetch(url)
@@ -23,36 +22,38 @@ module.exports = {
         })
         .then(myJson => {
             let data = myJson;
-            console.log(data);
-            let explanation;
-            if(data[2][0].includes("may refer to")) {
-               explanation  = data[2][1];
-            } else {
-                explanation = data[2][0];
-            }
-            console.log(explanation);
-            message.channel.send({embed: {
-                color: 6235521,
-                title: `${term.toUpperCase()}`,
-                url: `${data[3][0]}`,
-                thumbnail: {
-                    url: '',
-                },
-                fields: [{
-                        name: "Explanation",
-                        value: `${explanation}`,
-                    },
-                ],
-                timestamp: new Date(),
-                footer: {
-                    url: 'https://www.w3schools.com/jsref/jsref_includes.asp',
-                    text: "© Rivenge",
+            if(data[2][0].length > 0 && data[2][0].length > 0 && data[2][1].length > 0) {
+                let explanation;
+                if(data[2][0].includes("may refer to")) {
+                    explanation  = data[2][1];
+                } else {
+                    explanation = data[2][0];
                 }
-            }});
+                
+                message.channel.send({embed: {
+                    color: 6235521,
+                    title: `${term.toUpperCase()}`,
+                    url: `${data[3][0]}`,
+                    thumbnail: {
+                        url: '',
+                    },
+                    fields: [{
+                            name: "Explanation",
+                            value: `${explanation}`,
+                        },
+                    ],
+                    timestamp: new Date(),
+                    footer: {
+                        text: "© Rivenge",
+                    }
+                }});
+            }
+            else {
+                message.channel.send(`No results were found for ${term}`);
+            }
         })
         .catch(error => {
             message.channel.send(`No results were found for ${term}`);
-            console.log(error);
         });
     }
 }

@@ -22,7 +22,6 @@ module.exports = {
         .then( myJson => {
             let data = myJson;
             let words = `Words that rhyme with ${term}: \n`;
-            console.log(data[0].word)
             data.map(item => { words+= item.word + "\n" });
             message.channel.send("```" + words + "```");
         })

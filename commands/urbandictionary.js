@@ -14,7 +14,6 @@ module.exports = {
 		else {
 			term = args[0];
 		}
-		console.log(term);
 		const url = `http://api.urbandictionary.com/v0/define?term=${term}`;
 
 		const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;

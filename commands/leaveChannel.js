@@ -5,7 +5,6 @@ module.exports = {
 
     async run(message, args) {
         const { voiceChannel } = message.member;
-        console.log('Leave');
         voiceChannel.leave();
     }
 
