@@ -36,7 +36,7 @@ module.exports = {
             })
             .then(myJson => {
                 let data = myJson;
-                console.log("Url " + data[3][0], "");
+                
                 if(data[3][0].length > 0 && data[2][0].length > 0 || data[2][1].length > 0) {
                     let explanation;
                     if(data[2][0].includes("may refer to")) {
