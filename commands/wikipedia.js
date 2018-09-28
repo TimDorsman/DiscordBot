@@ -63,10 +63,12 @@ module.exports = {
                     }});
                 }
                 else {
+                    term.replace('_', ' ');
                     message.channel.send(`No results were found for ${term}`);
                 }
             })
             .catch(error => {
+                term.replace('_', ' ');
                 message.channel.send(`No results were found for ${term}`);
             });
         })
