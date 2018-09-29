@@ -24,7 +24,7 @@ const prefix = '!';
 
 let args; 
 client.on('ready', () => {
-	console.log(`Logged in as ${client.user.tag}`);
+	console.log(`Logged in as ${client.user.tag}`, client.ping);
 });
 
 client.on('message', async message => {

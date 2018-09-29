@@ -1,4 +1,5 @@
 const config = require('../auth.json');
+const fetch = require('node-fetch');
 
 module.exports = {
 	name: "catfacts",
@@ -7,17 +8,14 @@ module.exports = {
     
     async run(message, args) {
         const url = `https://cat-fact.herokuapp.com/facts`;
-        const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-		let xhr = new XMLHttpRequest();
 
-		xhr.onreadystatechange = () => {
-            if(xhr.readyState == 4 && xhr.status == 200) {
-                let data = JSON.parse(xhr.responseText);
-                let i = Math.floor(Math.random() * data.all.length);
-                message.channel.send(data.all[i].text);
-            }
-        }
-        xhr.open("GET", url, true);
-        xhr.send();
+        fetch(url)
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            let i = Math.floor(Math.random() * data.all.length);
+            message.channel.send(data.all[i].text);
+        })
     }
 }

@@ -1,3 +1,5 @@
+const fetch = require("node-fetch");
+
 module.exports = {
 	name: "weather",
 	usage: "!weather <city> <city2> <city3> <city4>",
@@ -15,14 +17,16 @@ module.exports = {
 		}
 		let url = `http://api.openweathermap.org/data/2.5/forecast?q=${term}&APPID=e710119f33ab831a30eaf3f6e9f4fb2f&units=metric`;
 
-		const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-		let xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = () => {
-			if(xhr.readyState == 4 && xhr.status == 200) {
-				let data = JSON.parse(xhr.responseText);
-				let colorEmbed;
-				let thumbImage;
-				
+		fetch(url)
+		.then(response => {
+			return response.json();
+		})
+		.then(data => {
+			let colorEmbed;
+			let thumbImage;
+			console.log(data);
+			if(data.list.length > 0) {
+
 				switch (data.list[0].weather[0].description) {
 					case 'clear temperature ':
 						colorEmbed = 3134439;
@@ -94,9 +98,12 @@ module.exports = {
 					}
 				}});
 			}
-		}
-		xhr.open("GET", url, true);
-		xhr.send();
+		})
+		.catch(error => {
+			const quotes = [`There are no results for ${term}, must be some shithole.`,`You either must have a typo or you are just mentally retarded.. ${term} is not a city.`, `Stop making up stupid city names like ${term}. You are not the president.`, `${message.author.username}, Do you live in ${term}? Well that must suck cus we don't have a fucking clue either about your weather.`];
+			let i = Math.floor(Math.random() * quotes.length);
+			message.channel.send(quotes[i]);
+		})
 	}
 };
 
