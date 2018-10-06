@@ -2,37 +2,37 @@ const { Client } = require("pg");
 const config = require("../auth.json");
 
 module.exports = { 
-    name: "coins", 
-    usage: "!coins ", 
-    description: "gives money",
+	name: "coins", 
+	usage: "!coins ", 
+	description: "gives money",
 
-    async run(message, args) {
+	async run(message, args) {
 
-        function getMoney() {
-            return Math.floor(Math.random() * 100) + 1 
+		function getMoney() {
+			return Math.floor(Math.random() * 100) + 1 
 		}
 		
-        const con = new Client({
+		const con = new Client({
 			connectionString: config.database,
 			ssl: true
 		})
 
 		con.connect(err => {
-            if(err) throw err;
-        })
-        if(!args[0]) {
+			if(err) throw err;
+		})
+		if(!args[0]) {
 			con.query(`SELECT * FROM users WHERE id = '${message.author.id}'`, (err, rows) => {
 				if(err) throw err;
 				message.channel.send(`${message.author.username} has ${rows[0].money} coins in his wallet!`);
 			});
-        }
+		}
 		if(args[0] == "signup") {
 			con.query(`SELECT * FROM users WHERE id = '${message.author.id}'`, (error, getrow) => {
-                if(getrow.rowCount < 1) {
-                    con.query(`INSERT INTO users (id, username) VALUES('${message.author.id}','${message.author.username}')`, (err, rows) => {
+				if(getrow.rowCount < 1) {
+					con.query(`INSERT INTO users (id, username) VALUES('${message.author.id}','${message.author.username}')`, (err, rows) => {
 						if(err) throw err;
 						message.reply('Signed up succesfully! use `!coins start` to start');
-                    });
+					});
 				}
 				else {
 					message.reply(`You've already signed up.`);
@@ -81,13 +81,13 @@ module.exports = {
 			}, cooldown * 60000)
 		}
 
-        if(args[0] == "start") {
+		if(args[0] == "start") {
 			//Check of de user al is gesigned up
-            con.query(`SELECT * FROM users WHERE id = '${message.author.id}'`, (error, getrow) => {
-                if(getrow.rowCount < 1) {
+			con.query(`SELECT * FROM users WHERE id = '${message.author.id}'`, (error, getrow) => {
+				if(getrow.rowCount < 1) {
 					message.reply('Please use `!coins signup` to begin.');
 				}
-                else {
+				else {
 					if(error) throw error;
 					//Check of de timer al bezig is
 					if(getrow.rows[0].started == 0) {
@@ -104,7 +104,7 @@ module.exports = {
 								let getmoney = getMoney();
 								let money = grows.rows[0].money;
 								let sql = `UPDATE users SET money = ${money + getmoney} WHERE id = '${message.author.id}'`;
-			
+
 								con.query(sql, (err) => {
 										con.query(`SELECT * FROM users WHERE id = '${message.author.id}'`, (err, erows) => {
 											if(err) throw err;
@@ -118,10 +118,9 @@ module.exports = {
 					//Check of de gebruiker al bezig is met spelen
 					else {
 						message.reply('You are already playing');
-						
 					}
-                }
-            })
-        }
-    }
+				}
+			})
+		}
+	}
 }
