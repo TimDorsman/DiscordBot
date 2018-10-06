@@ -1,4 +1,5 @@
 const { Client } = require("pg");
+const config = require("../auth.json");
 
 module.exports = { 
     name: "coins", 
@@ -12,7 +13,7 @@ module.exports = {
 		}
 		
         const con = new Client({
-			connectionString: "postgres://xjxelqwfvewiij:7cd0c67a3a971bf90c640c76089a20543176f6fb6ae257f329986c49a2453ae6@ec2-54-247-101-205.eu-west-1.compute.amazonaws.com:5432/dcjvftgpqlve4c",
+			connectionString: config.database,
 			ssl: true
 		})
 
