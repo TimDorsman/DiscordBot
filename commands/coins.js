@@ -118,6 +118,7 @@ module.exports = {
 					//Check of de gebruiker al bezig is met spelen
 					else {
 						message.reply('You are already playing');
+						
 					}
                 }
             })
