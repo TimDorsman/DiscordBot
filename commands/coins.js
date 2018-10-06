@@ -77,7 +77,7 @@ module.exports = {
 					})
 				})
 				cooldown = Math.floor(Math.random() * 60) + 15;
-			}, 1000)
+			}, cooldown)
 		}
 
         if(args[0] == "start") {
@@ -91,7 +91,7 @@ module.exports = {
 					//Check of de timer al bezig is
 					if(getrow.rows[0].started == 0) {
 						message.channel.send('You are now playing');
-						let duration = 5 * 1000;
+						let duration = Math.floor(Math.random()*(30-15+1)+15);
 						setInterval( () => {
 							con.query(`SELECT * FROM users WHERE id = '${message.author.id}'`, (err, grows) => {
 								if (err) throw err;
