@@ -90,6 +90,10 @@ module.exports = {
 					if(error) throw error;
 					//Check of de timer al bezig is
 					if(getrow.rows[0].started == 0) {
+						con.query(`UPDATE users SET started = 1 WHERE id = '${message.author.id}'`, err => {
+							console.log('UPDATED');
+							if(err) throw err;
+						})
 						message.channel.send('You are now playing');
 						let duration = Math.floor(Math.random()*(30-15+1)+15);
 						console.log(duration);
@@ -98,7 +102,7 @@ module.exports = {
 								if (err) throw err;
 								let getmoney = getMoney();
 								let money = grows.rows[0].money;
-								let sql = `UPDATE users SET money = ${money + getmoney}, started = 1 WHERE id = '${message.author.id}'`;
+								let sql = `UPDATE users SET money = ${money + getmoney} WHERE id = '${message.author.id}'`;
 			
 								con.query(sql, (err) => {
 										con.query(`SELECT * FROM users WHERE id = '${message.author.id}'`, (err, erows) => {
