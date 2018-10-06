@@ -77,7 +77,7 @@ module.exports = {
 					})
 				})
 				cooldown = Math.floor(Math.random() * 60) + 15;
-			}, cooldown)
+			}, cooldown * 60000)
 		}
 
         if(args[0] == "start") {
@@ -92,6 +92,7 @@ module.exports = {
 					if(getrow.rows[0].started == 0) {
 						message.channel.send('You are now playing');
 						let duration = Math.floor(Math.random()*(30-15+1)+15);
+						console.log(duration);
 						setInterval( () => {
 							con.query(`SELECT * FROM users WHERE id = '${message.author.id}'`, (err, grows) => {
 								if (err) throw err;
@@ -107,7 +108,7 @@ module.exports = {
 									if(err) throw err;
 								});
 							})
-						}, duration)
+						}, duration * 60000)
 					}
 					//Check of de gebruiker al bezig is met spelen
 					else {
